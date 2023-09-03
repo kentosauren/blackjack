@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import "./App.css";
 import ScoreCounter from "./components/ScoreCounter";
 import ButtonUp from "./components/buttonUp";
+import HighScoreModal from "./components/HighscoreModal";
 
 function App() {
   const [counter, setCounter] = useState(0);
@@ -71,22 +72,14 @@ function App() {
   return (
     <>
       {showHighScoreModal && (
-        <div className="high-score-modal">
-          <div className="modal-content">
-            <h2>Congratulations!</h2>
-            <p>You've got a new high score!</p>
-            <p>{counter} points!</p>
-            <button
-              onClick={() => {
-                setShowHighScoreModal(false);
-                // Add your additional logic here
-                setCounter(0);
-              }}
-            >
-              Close
-            </button>
-          </div>
-        </div>
+        <HighScoreModal
+          counter={counter}
+          onClose={() => {
+            setShowHighScoreModal(false);
+            setCounter(0);
+            setStatusText("");
+          }}
+        />
       )}
       <div className="container">
         <div className="side-image"></div>
